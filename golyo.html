@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golyó mozgása</title>
+    <style>
+        #vaszon {
+            background-color: bisque;
+            border: 2px solid black;
+            display: block;
+            margin:auto;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="vaszon" width="800" height="600"></canvas>
+    <script>
+        var tartalom = document.getElementById("vaszon").getContext("2d");
+        var vx = Math.floor(Math.random() * 7) + 3
+        var vy = Math.floor(Math.random() * 7) + 3
+        var m = vaszon.height
+        var sz = vaszon.width
+        var r = 10
+        var x = sz / 2
+        var y = m / 2
+        function golyo() {
+            tartalom.beginPath()
+            tartalom.arc(x,y,r,0,Math.PI * 2)
+            tartalom.fillStyle = "blue"
+            tartalom.fill()
+            tartalom.closePath()
+        }
+        function pont() {
+            tartalom.clearRect(0,0,sz,m)
+            if (x + r > sz || x - r < 0) {
+                vx = -vx
+            }
+            if (y + r > m || y - r < 0 ) {
+                vy = -vy
+            }
+            x += vx
+            y += vy
+            golyo()
+        }
+        setInterval(pont,10)
+    </script>
+    
+</body>
+</html>

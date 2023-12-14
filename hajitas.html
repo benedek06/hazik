@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferde hajítás</title>
+    <style>
+        #vaszon {
+            background-color: bisque;
+            border: 2px solid black;
+            display: block;
+            margin:auto;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="vaszon" width="800" height="600"></canvas>
+    <form id="urlap">
+        <h2>Ferde hajítás paraméterei</h2>
+        <label>v<sub>0</sub> = </label>
+        <input type="text" name="v0"><br><br>
+        <label>&alpha; = </label>
+        <input type="text" name="alfa"><br><br>
+        <input type="button" value="Hajítás" onclick="hajitas()">
+    </form>
+    <script>
+        function hajitas() {
+            tartalom = document.getElementById("vaszon").getContext("2d")
+            v0 = Number(document.forms["urlap"]["v0"].value)
+            alfa = Number(document.forms["urlap"]["alfa"].value) / 180 * Math.PI
+            m = 600
+            sz = 800
+            g = 9.81
+            x = 0
+            y = 0
+            t = 0.0
+            v0x = v0 * Math.cos(alfa)
+            v0y = v0 * Math.sin(alfa)
+        }
+        function golyo() {
+            tartalom.beginPath()
+            tartalom.arc(x,y,10,0,Math.PI * 2)
+            tartalom.fillStyle = "black"
+            tartalom.fill()
+            tartalom.closePath()
+        }
+        function pont() {
+            tartalom.clearRect(0,0,sz,m)
+            t = t + 0.1
+            x = Math.floor(v0x * t)
+            y = -Math.floor((v0y * t) - g / 2 * t * t) + m
+            golyo()
+        }
+        setInterval(pont,10)
+    </script>
+    
+</body>
+</html>

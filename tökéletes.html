@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dolgozat</title>
+</head>
+<body>
+    <script>
+        function tokeletes(n) {
+            let sum = 1;
+            for (let i = 2; i <= Math.sqrt(n); i++) {
+                if (n % i === 0) {
+                    sum += i;
+                    if (i !== n / i) {
+                        sum += n / i;
+                    }
+                }
+            }
+            return sum === n;
+        }
+
+        function lista() {
+            const n = parseInt(prompt("Addja meg a számot: "));
+
+            if (isNaN(n) || n <= 0) {
+                alert("Érvénytelen bemenet.");
+                return;
+            }
+
+            let tok = [];
+            for (let i = 2; i <= n; i++) {
+                if (tokeletes(i)) {
+                    tok.push(i);
+                }
+            }
+
+            if (tok.length > 0) {
+                alert(tok.join(", "));
+            } else {
+                alert("Nincsenek!");
+            }
+        }
+
+    </script>
+    <button onclick="lista()">Tökeletes szám osztók</button>
+</body>
+</html>

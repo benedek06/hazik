@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript alapok</title>
+</head>
+<body>
+    <p id="reklam">Ez itt a reklám helye</p>
+    <button onclick="document.getElementById('reklam').innerHTML='Felnőtt gyermek kedve jó, édes élet HARIBO!'">Reklám</button><br>
+    <img src="szomoru.jpg" id="szmajli" width="200"><br>
+    <button onclick="document.getElementById('szmajli').src='vidam.jpg'">Vidám</button><br>
+    <p id="dolt">Ez egy normál szöveg!</p>
+    <button onclick="document.getElementById('dolt').style.fontStyle='italic'">Dőlt</button><br>
+    <p id="elrejt">Ez most látszik!</p>
+    <button onclick="document.getElementById('elrejt').style.display='none'">Elrejt</button><br>
+    <h2>Számvizsgálat</h2>
+    <script>
+        function osztokszama(n) {
+            db = 0
+            for (i=1;i<=n;i++) {
+                if (n % i == 0) {
+                    db++
+                }
+            }
+            return db
+        }
+        function SzamjegyekSzama(n) {
+            szja = 0
+            while (n > 0) {
+                szja++
+                n = Math.floor(n/10)
+            }
+            return szja
+        }
+        function SzamjegyekOsszege(n) {
+            szjo = 0
+            while (n > 0) {
+                szjo += n%10
+            }
+            return szjo
+        }
+        function Bindaris(n) {
+            text = ""
+            while(n>0){
+                text = n%2 +text
+            }
+            return szjo
+        }
+        function vizsgal() {
+            x = Number(document.forms["urlap"]["beszam"].value)
+            if (x % 2 == 0) {
+                document.getElementById("paritas").innerHTML="Páros"
+            } else {
+                document.getElementById("paritas").innerHTML="Páratlan"
+            }
+
+            document.getElementById("osztokszama").innerHTML=osztokszama(x)
+            
+            if (osztokszama(x) == 2) {
+                document.getElementById("prim").innerHTML="Igen"
+            } else {
+                document.getElementById("prim").innerHTML="Nem"
+            }
+            document.getElementById("szja").innerHTML=SzamjegyekSzama(x)
+            document.getElementById("szjo").innerHTML=SzamjegyekOsszege(x)
+        }
+    </script>
+    <form name="urlap">
+        <label>Adj meg egy számot:</label>
+        <input type="text" name="beszam">
+        <input type="button" value="Számvizsgálat" onclick="vizsgal()">
+    </form>
+    <p>Paritás:<span id="paritas">?</span></p>
+    <p>Osztók száma:<span id="osztokszama">?</span></p>
+    <p>Prímszám:<span id="prim">?</span></p>
+    <p>Számjegyek száma:<span id="szja">?</span></p>
+    <p>Számjegyek összege:<span id="szjo">?</span></p>
+</body>
+</html>
